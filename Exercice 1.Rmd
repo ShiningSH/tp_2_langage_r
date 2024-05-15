@@ -1,0 +1,95 @@
+---
+title: "Exercice 1"
+author: "Damien & Yanael FEUILLET--GARCIA"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+#Question 1 :
+
+Charger le jeu de données House Princing (fichier house pricing.csv) Donner quelques indicateurs sur la colonne LotArea (minimum, maximum, range, moyenne, médiane, ...) sans utiliser la fonction summary().
+
+```{r}
+library(dplyr)
+
+house_pricing <- read.csv("datas/house_pricing.csv")
+
+lotarea_min <- min(house_pricing$LotArea, na.rm = TRUE)
+lotarea_max <- max(house_pricing$LotArea, na.rm = TRUE)
+lotarea_range <- range(house_pricing$LotArea, na.rm = TRUE)
+lotarea_mean <- mean(house_pricing$LotArea, na.rm = TRUE)
+lotarea_median <- median(house_pricing$LotArea, na.rm = TRUE)
+lotarea_sd <- sd(house_pricing$LotArea, na.rm = TRUE)
+
+list(
+  min = lotarea_min,
+  max = lotarea_max,
+  range = lotarea_range,
+  mean = lotarea_mean,
+  median = lotarea_median,
+  sd = lotarea_sd
+)
+```
+
+#Question 2 :
+
+Calculer la variance sur la colonne YrSold grâce à la fonction associée.
+
+```{r}
+variance_YrSold <- var(house_pricing$YrSold, na.rm = TRUE)
+variance_YrSold
+```
+
+#Question 3 :
+
+Calculons maintenant l'écart-type toujours sur sur la colonne YrSold grâce à la fonction sd(). Comment l'interpréter?
+
+```{r}
+sd_YrSold <- sd(house_pricing$YrSold, na.rm = TRUE)
+sd_YrSold
+```
+Interprétation :
+Si l'écart type est plus élevé cela signifie que les années de vente sont plus étalées, tandis qu’un écart type plus faible indique que les années de vente sont plus proches de l’année moyenne.
+
+#Question 4 :
+
+Quels sont les effectifs associés à chacune des dates contenues dans la colonne YrSold ? Visualiser cela avec une courbe puis un diagramme en barres. Que pouvez-vous dire?
+
+```{r}
+yrsold_counts <- table(house_pricing$YrSold)
+
+plot(as.numeric(names(yrsold_counts)), as.numeric(yrsold_counts), type = "o",
+     xlab = "Year Sold", ylab = "Count", main = "Number of Houses Sold per Year")
+
+barplot(yrsold_counts, main = "Number of Houses Sold per Year",
+        xlab = "Year Sold", ylab = "Count", col = "blue")
+```
+Interprétation :
+
+    - Les pourcentages de satisfaction varient de 65% à 98%.
+    - La médiane est de 81%.
+    - Les données sont assez symétriques, avec 50% des valeurs (IQR) comprises entre 74% et 87%.
+
+En conclusion, le boxplot montre que la majorité des pourcentages de satisfaction des étudiants se situent entre 74% et 87%, avec quelques valeurs allant jusqu'à 98%, sans valeurs aberrantes extrêmes.
+
+#Question 5 :
+
+Découpez votre dataset pour ne garder que les 15 dernières colonnes, à savoir :
+
+```{r}
+library(knitr)
+include_graphics("datas/Capture d'écran 2024-05-15 163618.png")
+```
+NB : c'est la fonction names() qui permet d'obtenir ce résultat (=affichage des noms de colonnes)
+
+```{r}
+#install.packages("DT")
+
+library(DT)
+
+column_names <- names(house_pricing)
+last_15_columns <- house_pricing[, (ncol(house_pricing) - 14):ncol(house_pricing)]
+
+datatable(last_15_columns, options = list(pageLength = 10, lengthMenu = c(10, 25, 50, 100)))
+
+```

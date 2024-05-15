@@ -1,0 +1,64 @@
+---
+title: "Exercice 2"
+author: "Damien & Yanael FEUILLET--GARCIA"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+Enoncé : 
+
+On a relevé les pourcentages de satisfaction des cours reçus par des étudiants d’une école d’ingénieur. Les résultats des notes sur 100 sont les suivants :
+
+  74, 85, 95, 84, 68, 93, 84, 87, 78, 72, 81, 91, 80, 65, 76, 81, 97, 69, 70, 98.
+  
+#Question 1 :
+
+Créer la séquence satisfaction avec la fonction c()
+
+```{r}
+satisfaction <- c(74, 85, 95, 84, 68, 93, 84, 87, 78, 72, 81, 91, 80, 65, 76, 81, 97, 69, 70, 98)
+satisfaction
+```
+
+#Question 2 :
+
+Afficher le tableau des effectifs et vérifier que chacune des modalités est égale à 1 avec la
+fonction table()
+
+```{r}
+satisfaction_table <- table(satisfaction)
+satisfaction_table
+
+all(satisfaction_table == 1)
+```
+
+#Question 3 :
+
+Combien de résultats ont été récoltés ? Utilisez une fonction R pour déterminer ce résultat
+
+```{r}
+num_results <- length(satisfaction)
+num_results
+```
+
+#Question 4 :
+
+Afficher la visualisation boite à moustache de cette séquence. Retrouver les éléments clés grâce à la fonction summary()
+Visualiser l'histogramme de ces pourcentages de satisfcation avec 4 classes. Que pouvez-vous en dire ?
+
+```{r}
+boxplot(satisfaction, main = "Boxplot of Satisfaction Percentages", ylab = "Satisfaction (%)")
+
+summary_satisfaction <- summary(satisfaction)
+summary_satisfaction
+
+hist(satisfaction, breaks = 4, main = "Histogram of Satisfaction Percentages", xlab = "Satisfaction (%)", col = "lightblue", border = "black")
+```
+
+Interprétation :
+
+    - Les pourcentages de satisfaction varient de 65% à 98%.
+    - La médiane est de 81%.
+    - Les données sont assez symétriques, avec 50% des valeurs (IQR) comprises entre 74% et 87%.
+
+En conclusion, le boxplot montre que la majorité des pourcentages de satisfaction des étudiants se situent entre 74% et 87%, avec quelques valeurs allant jusqu'à 98%, sans valeurs aberrantes extrêmes.
