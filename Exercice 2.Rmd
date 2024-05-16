@@ -1,6 +1,6 @@
 ---
 title: "Exercice 2"
-author: "Damien & Yanael FEUILLET--GARCIA"
+author: "Damien BROSSAT & Yanael FEUILLET--GARCIA"
 date: "`r Sys.Date()`"
 output: html_document
 ---
@@ -54,11 +54,3 @@ summary_satisfaction
 
 hist(satisfaction, breaks = 4, main = "Histogram of Satisfaction Percentages", xlab = "Satisfaction (%)", col = "lightblue", border = "black")
 ```
-
-Interprétation :
-
-    - Les pourcentages de satisfaction varient de 65% à 98%.
-    - La médiane est de 81%.
-    - Les données sont assez symétriques, avec 50% des valeurs (IQR) comprises entre 74% et 87%.
-
-En conclusion, le boxplot montre que la majorité des pourcentages de satisfaction des étudiants se situent entre 74% et 87%, avec quelques valeurs allant jusqu'à 98%, sans valeurs aberrantes extrêmes.
